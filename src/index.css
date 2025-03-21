@@ -74,6 +74,7 @@
   
   html {
     scroll-behavior: smooth;
+    cursor: none;
   }
 
   body {
@@ -81,6 +82,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -102,6 +104,10 @@
   p {
     @apply leading-relaxed;
   }
+
+  a, button {
+    cursor: none;
+  }
 }
 
 @layer components {
@@ -119,6 +125,33 @@
 
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-blue-600;
+  }
+
+  /* Custom cursor styles */
+  .custom-cursor {
+    pointer-events: none;
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(14, 165, 233, 0.2);
+    mix-blend-mode: exclusion;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+  }
+
+  /* Cursor expansion on hover */
+  a:hover ~ .custom-cursor,
+  button:hover ~ .custom-cursor {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(14, 165, 233, 0.4);
+  }
+
+  /* Magnetic button effect */
+  .magnetic-button {
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 }
 
@@ -142,4 +175,48 @@
 .stagger-item.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Animation for floating elements */
+.float {
+  animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Subtle pulse animation */
+.pulse-subtle {
+  animation: pulse-subtle 3s infinite;
+}
+
+@keyframes pulse-subtle {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Text reveal animation */
+.text-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  animation: text-reveal-sweep 2s ease-in-out infinite;
+}
+
+@keyframes text-reveal-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
