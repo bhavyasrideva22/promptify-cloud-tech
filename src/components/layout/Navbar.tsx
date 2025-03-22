@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,9 +25,9 @@ const Navbar = () => {
     )}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          <a href="#" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <span className="text-2xl font-semibold text-brand-slate">NexusAI</span>
-          </a>
+          </Link>
           
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#solutions" className="text-brand-slate/80 hover:text-brand-blue transition-colors">
@@ -41,6 +42,11 @@ const Navbar = () => {
             <Button variant="ghost" className="text-brand-slate/80 hover:text-brand-blue">
               About
             </Button>
+            <Link to="/career">
+              <Button variant="ghost" className="text-brand-slate/80 hover:text-brand-blue">
+                Careers
+              </Button>
+            </Link>
             <Button>Contact Us</Button>
           </nav>
           
@@ -87,6 +93,13 @@ const Navbar = () => {
           >
             About
           </a>
+          <Link 
+            to="/career" 
+            className="text-xl text-brand-slate w-full text-center py-3 border-b border-gray-100"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Careers
+          </Link>
           <Button 
             className="w-full mt-4"
             onClick={() => setIsMobileMenuOpen(false)}
